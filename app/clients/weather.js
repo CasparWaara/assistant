@@ -23,34 +23,34 @@ function weatherCurrent(location, search = '', days = 0) {
         })
         .then(function (response) {
             let weather = '';
-
-            const w = _.get(response.data, 'query.results.channel');
-            if (w !== undefined) {
-                if (search === '') {
-                    weather += w.description + '\n';
-                    weather += 'It\'s ' + w.item.condition.temp + 'C and it is ' + w.item.condition.text;
-                } else if (search === 'sunset') {
-                    weather += w.description + '\n';
-                    weather += 'Sun will set at ' + w.astronomy.sunset;
-                } else if (search === 'sunrise') {
-                    weather += w.description + '\n';
-                    weather += 'Sun will rise at ' + w.astronomy.sunrise;
-                } else if (search === 'forecast') {
-                    weather += w.description + '\n';
-                    for (let i = 0; i < days; i++) {
-                        weather += w.item.forecast[i].day + ' ' + w.item.forecast[i].date + '\n' +
-                            '   ' + w.item.forecast[i].high + ' / ' + w.item.forecast[i].low + ' C, ' +
-                            w.item.forecast[i].text + '\n';
-                    }
-                } else if (search === 'rain') {
-                    weather += w.description + '\n';
-                    const substrings = ['rain', 'snow', 'shower'];
-                    if (substrings.some(function (v) {
-                            return w.item.forecast[1].toLowerCase().indexOf(v) >= 0;
-                        })) {
-                        weather += 'Yes';
-                    } else {
-                        weather += 'No';
+            if (_.get(response.data, 'query.results.channel')) {
+                const w = response.data.query.results.channel;
+                if (w !== undefined) {
+                    if (search === '') {
+                        weather += w.description + '\n';
+                        weather += 'It\'s ' + w.item.condition.temp + 'C and it is ' + w.item.condition.text;
+                    } else if (search === 'sunset') {
+                        weather += w.description + '\n';
+                        weather += 'Sun will set at ' + w.astronomy.sunset;
+                    } else if (search === 'sunrise') {
+                        weather += w.description + '\n';
+                        weather += 'Sun will rise at ' + w.astronomy.sunrise;
+                    } else if (search === 'forecast') {
+                        weather += w.description + '\n';
+                        for (let i = 0; i < days; i++) {
+                            weather += w.item.forecast[i].day + ' ' + w.item.forecast[i].date + '\n' +
+                                '   ' + w.item.forecast[i].high + ' / ' + w.item.forecast[i].low + ' C, ' +
+                                w.item.forecast[i].text + '\n';
+                        }
+                    } else if (search === 'rain') {
+                        const substrings = ['rain', 'snow', 'shower'];
+                        if (substrings.some(function (v) {
+                                return w.item.forecast[1].text.toLowerCase().indexOf(v) >= 0;
+                            })) {
+                            weather += 'Yes';
+                        } else {
+                            weather += 'No';
+                        }
                     }
                 }
             }
@@ -69,10 +69,10 @@ function weatherParser(input) {
         return weatherCurrent(getLocation(input));
     } else if (input.startsWith('when')) {
         return weatherCurrent(getLocation(input), input.split(' ')[2]);
-    } else if (isNumber(input) !== NaN) {
-        return weatherCurrent(getLocation(input), 'forecast', isNumber(input));
     } else if (input.startsWith('will')) {
         return weatherCurrent(getLocation(input), 'rain');
+    } else if (isNumber(input) !== NaN) {
+        return weatherCurrent(getLocation(input), 'forecast', isNumber(input));
     }
     return 'Could not get the weather information. Not sure what to do :(';
 }

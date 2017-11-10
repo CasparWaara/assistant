@@ -1,4 +1,5 @@
 import weather from './clients/weather';
+import help from './help';
 
 async function virtual_assistant(input) {
     const res = await identifyQuestion(input);
@@ -8,8 +9,10 @@ async function virtual_assistant(input) {
 async function identifyQuestion(input) {
     if (isWeather(input)) {
         return weather.weatherParser(input);
+    } else if (input === 'help') {
+        return help.help();
     }
-    return 'no habla';
+    return randomdk();
 }
 
 function isWeather(input) {
@@ -21,6 +24,25 @@ function isWeather(input) {
     } else {
         return false;
     }
+}
+
+function randomdk() {
+    let sel = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+    switch (sel) {
+        case 1:
+            return 'Not yet ready to dominate world or I didn\'t understand your question (try help)';
+        case 2:
+            return 'What did you mean? (try help)'
+        case 3:
+            return 'That was unexpected. Don\'t know what to say (try help)';
+        case 4:
+            return 'Try something else (try help)';
+        case 5:
+            return 'I\'m still learning... (try help)';
+        default:
+            return 'Ma ei mõista teie küsimust (try help)';
+    }
+
 }
 
 module.exports = {
