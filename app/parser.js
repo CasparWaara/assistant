@@ -6,7 +6,21 @@ async function virtual_assistant(input) {
 }
 
 async function identifyQuestion(input) {
-    return weather.weatherCurrent('Oulu, fi');
+    if (isWeather(input)) {
+        return weather.weatherParser(input);
+    }
+    return 'no habla';
+}
+
+function isWeather(input) {
+    const substrings = ['weather', 'rain', 'snow', 'forecast', 'sunset', 'sunrise'];
+    if (substrings.some(function (v) {
+            return input.indexOf(v) >= 0;
+        })) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 module.exports = {

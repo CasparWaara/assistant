@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/CasparWaara/assistant#readme",
   "dependencies": {
-    "axios": "^0.17.0"
+    "axios": "^0.17.0",
+    "lodash": "^4.17.4",
+    "words-to-num": "0.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
