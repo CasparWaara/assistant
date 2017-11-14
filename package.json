@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.17.0",
     "lodash": "^4.17.4",
+    "moment": "^2.19.2",
     "words-to-num": "0.0.2"
   },
   "devDependencies": {

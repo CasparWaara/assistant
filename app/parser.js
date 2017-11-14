@@ -1,4 +1,5 @@
 import weather from './clients/weather';
+import money from './clients/money';
 import help from './help';
 
 async function virtual_assistant(input) {
@@ -9,6 +10,8 @@ async function virtual_assistant(input) {
 async function identifyQuestion(input) {
     if (isWeather(input)) {
         return weather.weatherParser(input);
+    } else if (isMoney(input)) {
+        return money.moneyParser(input);
     } else if (input === 'help') {
         return help.help();
     }
@@ -17,6 +20,17 @@ async function identifyQuestion(input) {
 
 function isWeather(input) {
     const substrings = ['weather', 'rain', 'snow', 'forecast', 'sunset', 'sunrise'];
+    if (substrings.some(function (v) {
+            return input.indexOf(v) >= 0;
+        })) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isMoney(input) {
+    const substrings = ['get', 'valuable', 'rate', 'risen', 'fallen'];
     if (substrings.some(function (v) {
             return input.indexOf(v) >= 0;
         })) {
