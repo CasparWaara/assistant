@@ -119,7 +119,7 @@ function moneyParser(input) {
 }
 
 async function yesterday(a, from) {
-    let url = 'https://api.fixer.io/' + moment().format('YYYY-MM-DD');
+    let url = 'https://api.fixer.io/' + moment().subtract(1, 'days').format('YYYY-MM-DD');
     return axios
         .get(url, {
             params: {
