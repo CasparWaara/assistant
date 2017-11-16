@@ -1,5 +1,6 @@
 function help() {
     let help = '';
+    help += 'Replace <> with your value.\n\n';
     help += 'Weather information: \n';
     help += '  what\'s the weather in <oulu, finland> \n';
     help += '  <five> day forecast for <oulu, finland> \n';
@@ -13,6 +14,13 @@ function help() {
     help += '  what is <EUR> rate \n';
     help += '  which was more valuable, <EUR> or <USD> in <2017-01-01> \n';
     help += '  has <USD> risen or fallen? \n';
+
+    help += 'Stock information: \n';
+    help += '  quote for <AAPL> \n';
+    help += '  has <AAPL> gone up? \n';
+    help += '  who is ceo of <AAPL> \n';
+    help += '  how much revenue <AAPL> made \n';
+    help += '  any news on <AAPL> \n';
     return help;
 }
 

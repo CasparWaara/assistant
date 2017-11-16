@@ -44,7 +44,7 @@ function isMoney(input) {
 }
 
 function isStock(input) {
-    const substrings = ['quote'];
+    const substrings = ['quote', 'gone', 'ceo', 'revenue', 'news'];
     if (substrings.some(function (v) {
             return input.indexOf(v) >= 0;
         })) {
