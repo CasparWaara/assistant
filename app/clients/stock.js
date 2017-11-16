@@ -59,7 +59,7 @@ function stockFetch(search, sparam) {
 }
 
 function stockParser(input) {
-
+    input = input.replace('?', '');
     if (input.startsWith('quote')) {
         return stockFetch('quote', input.split(' ')[2]);
     } else if (input.startsWith('has')) {

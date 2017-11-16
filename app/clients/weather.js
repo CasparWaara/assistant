@@ -96,7 +96,7 @@ function getLocation(input) {
     } else if (input.split(' ').indexOf('to') > 0) {
         return input.substring(input.indexOf('to') + 3);
     } else if (input.split(' ').indexOf('for') > 0) {
-        return input.substring(input.indexOf('for') + 3);
+        return input.substring(input.indexOf('for') + 4);
     } else {
         return '';
     }

@@ -21,6 +21,20 @@ function help() {
     help += '  who is ceo of <AAPL> \n';
     help += '  how much revenue <AAPL> made \n';
     help += '  any news on <AAPL> \n';
+
+    help += 'Brewdog Beer Recipes: \n';
+    help += '  give me a random beer \n';
+    help += '  give me a random beer with hop <GOLDINGS> \n';
+    help += '  give me a random beer with malt <EXTRA PALE> \n';
+    help += '  give me a random beer that goes with <FISH> \n';
+    help += '  give me a list of beers with yeast <WYEAST 1056> \n';
+
+    help += 'Patents information: \n';
+    help += '  how many patents does inventor <Jobs, Steve> have \n';
+    help += '  how many patents does applicant <Jobs, Steve> have \n';
+    help += '  give me a patent with number <US9748552> \n';
+    help += '  how many patents can you find with <IPHONE> \n';
+    help += '  how many patents does <APPLE> have \n';
     return help;
 }
 

@@ -5,45 +5,63 @@ import moment from 'moment';
 
 const errorMsg = 'Could not get the beer information. Not sure what to do :(';
 // beers: 
-// give me random beer
-// has <AAPL> gone up?
-// who is ceo of <AAPL>
-// how much revenue <AAPL> made
-// any news on <AAPL>
+// give me a random beer
+// give me a random beer with hop <GOLDINGS>
+// give me a random beer with malt <EXTRA PALE>
+// give me a random beer that goes with <FISH>
+// give me a list of beers with yeast <WYEAST 1056>
 function beerFetch(search, sparam) {
-    let url = 'https://api.punkapi.com/v2/beers/';
+    let url = 'https://api.punkapi.com/v2/beers';
 
     if (search === 'random') {
-        url += 'random';
+        url += '/random';
+    } else if (search === 'hop') {
+        url += '?hops=' + encodeURI(sparam);
+    } else if (search === 'malt') {
+        url += '?malt=' + encodeURI(sparam);
+    } else if (search === 'food') {
+        url += '?food=' + encodeURI(sparam);
+    } else if (search === 'yeast') {
+        url += '?yeast=' + encodeURI(sparam);
     }
     return axios
-        .get(url, {
-
-        })
+        .get(url, {})
         .then(function (response) {
             if (search === 'random') {
                 return recipeParser(response.data);
+            } else if (search === 'hop' || search === 'malt' || search === 'food') {
+                return recipeParser(response.data[Math.floor(Math.random() * response.data.length) + 0]);
+            } else if (search === 'yeast') {
+                return nameParser(response.data);
             }
-
         })
         .catch(function (error) {
-            if (error.data !== undefined) {
-                if (error.data === 'Unknown symbol') {
-                    return 'Unknown symbol :(';
-                }
-            } else {
-                return errorMsg + ' ' + error;
-            }
-
+            return errorMsg + ' ' + error;
         });
 }
 
 function beerParser(input) {
-
-    if (input.indexOf('random') > -1) {
-        return beerFetch('random', input.split(' ')[3]);
+    input = input.replace('?', '');
+    if (input.indexOf('random') > -1 && input.indexOf('hop') == -1) {
+        return beerFetch('random');
+    } else if (input.indexOf('random') > -1 && input.indexOf('hop') > -1) {
+        return beerFetch('hop', input.substring(input.indexOf('hop') + 4));
+    } else if (input.indexOf('random') > -1 && input.indexOf('malt') > -1) {
+        return beerFetch('malt', input.substring(input.indexOf('malt') + 5));
+    } else if (input.indexOf('goes') > -1) {
+        return beerFetch('food', input.substring(input.indexOf('with') + 5));
+    } else if (input.indexOf('list') > -1 && input.indexOf('random') == -1) {
+        return beerFetch('yeast', input.substring(input.indexOf('yeast') + 6));
     }
     return errorMsg;
+}
+
+function nameParser(beers) {
+    let resp = '';
+    for (let beer of beers) {
+        resp += `${beer.name} \n`;
+    }
+    return resp;
 }
 
 function recipeParser(beers) {
@@ -65,7 +83,7 @@ function recipeParser(beers) {
         }
         resp += 'Hops: \n';
         for (let ing of beer.ingredients.hops) {
-            resp += `  ${ing.name} ${ing.amount.value} ${ing.amount.unit} => ${ing.add} \n`;
+            resp += `  ${ing.name} ${ing.amount.value} ${ing.amount.unit} with attribute ${ing.attribute} => ${ing.add} \n`;
         }
 
         resp += `Yeast to be used:  ${beer.ingredients.yeast}\n`;

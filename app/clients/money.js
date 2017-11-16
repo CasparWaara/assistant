@@ -93,6 +93,7 @@ async function currencyFetch(from, to, date = '', question = '', amount) {
 }
 
 function moneyParser(input) {
+    input = input.replace('?', '');
     if (input.startsWith('how many')) {
         const from = input.split(' ')[2];
         const to = input.split(' ')[8];

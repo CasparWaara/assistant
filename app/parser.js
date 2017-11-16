@@ -2,6 +2,7 @@ import weather from './clients/weather';
 import money from './clients/money';
 import stock from './clients/stock';
 import beer from './clients/beer';
+import patent from './clients/patent';
 import help from './help';
 
 async function virtual_assistant(input) {
@@ -18,6 +19,8 @@ async function identifyQuestion(input) {
         return stock.stockParser(input);
     } else if (isBeer(input)) {
         return beer.beerParser(input);
+    } else if (isPatent(input)) {
+        return patent.patentParser(input);
     } else if (input === 'help') {
         return help.help();
     }
@@ -57,6 +60,7 @@ function isStock(input) {
     }
 }
 
+
 function isBeer(input) {
     const substrings = ['random', 'beer', 'hop'];
     if (substrings.some(function (v) {
@@ -68,8 +72,19 @@ function isBeer(input) {
     }
 }
 
+function isPatent(input) {
+    const substrings = ['patent', 'inventor', 'ceo', 'revenue', 'news'];
+    if (substrings.some(function (v) {
+            return input.indexOf(v) >= 0;
+        })) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function randomdk() {
-    let sel = Math.floor(Math.random() * (5 - 1 + 1) + 1);
+    let sel = Math.floor(Math.random() * 5) + 1;
     switch (sel) {
         case 1:
             return 'Not yet ready to dominate world or I didn\'t understand your question (try help)';
