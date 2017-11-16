@@ -12,7 +12,7 @@ This is done as a part of competition.
 
 Example questions:
 <> notes example query. Subtitute with your own.
-
+```
 * Weather information:
     - what's the weather in <oulu, finland>
     - <five> day forecast for <oulu, finland>
@@ -47,4 +47,4 @@ Example questions:
     - give me a patent with number <US9748552>
     - how many patents can you find with <IPHONE>
     - how many patents does <APPLE> have
- 
+```
