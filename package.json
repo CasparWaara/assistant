@@ -1,0 +1,30 @@
+{
+  "name": "assistant",
+  "version": "1.0.0",
+  "description": "Virtual assistant challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node index.js --presets babel-preset-env",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CasparWaara/assistant.git"
+  },
+  "author": "Kari Pönkkö",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CasparWaara/assistant/issues"
+  },
+  "homepage": "https://github.com/CasparWaara/assistant#readme",
+  "dependencies": {
+    "axios": "^0.17.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.19.2",
+    "words-to-num": "0.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
