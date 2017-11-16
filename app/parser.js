@@ -1,6 +1,7 @@
 import weather from './clients/weather';
 import money from './clients/money';
 import stock from './clients/stock';
+import beer from './clients/beer';
 import help from './help';
 
 async function virtual_assistant(input) {
@@ -15,6 +16,8 @@ async function identifyQuestion(input) {
         return money.moneyParser(input);
     } else if (isStock(input)) {
         return stock.stockParser(input);
+    } else if (isBeer(input)) {
+        return beer.beerParser(input);
     } else if (input === 'help') {
         return help.help();
     }
@@ -45,6 +48,17 @@ function isMoney(input) {
 
 function isStock(input) {
     const substrings = ['quote', 'gone', 'ceo', 'revenue', 'news'];
+    if (substrings.some(function (v) {
+            return input.indexOf(v) >= 0;
+        })) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isBeer(input) {
+    const substrings = ['random', 'beer', 'hop'];
     if (substrings.some(function (v) {
             return input.indexOf(v) >= 0;
         })) {

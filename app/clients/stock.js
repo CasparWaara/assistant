@@ -28,7 +28,7 @@ function stockFetch(search, sparam) {
         })
         .then(function (response) {
             if (search === 'quote') {
-                return 'Last price for ' + response.data.companyName + ' is ' + response.data.latestPrice;
+                return `Last price for ${response.data.companyName} is ${response.data.latestPrice}`;
             } else if (search === 'up') {
                 if (response.data.change > 0) {
                     return 'Yes';
@@ -36,9 +36,9 @@ function stockFetch(search, sparam) {
                     return 'Nope';
                 }
             } else if (search === 'ceo') {
-                return 'CEO of ' + response.data.companyName + ' is ' + response.data.CEO;
+                return `CEO of ${response.data.companyName} is ${response.data.CEO}`;
             } else if (search === 'revenue') {
-                return 'Revenue per share for trailing 12 months is ' + response.data.revenuePerShare;
+                return `Revenue per share for trailing 12 months is ${response.data.revenuePerShare}`;
             } else if (search === 'news') {
                 return moment(response.data[0].datetime).format('DD.MM.YYYY') + ' : ' +
                     response.data[0].headline + '\n' +

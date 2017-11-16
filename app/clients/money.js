@@ -56,7 +56,7 @@ async function currencyFetch(from, to, date = '', question = '', amount) {
             if (question === 'convert') {
                 const respValue = _.get(response.data, 'rates.' + from);
                 if (!isNaN(respValue)) {
-                    return 'You get ' + (respValue * amount) + from + '\'s';
+                    return `You get ${(respValue * amount)} ${from}'s`;
                 } else {
                     return errorMsg;
                 }
@@ -72,16 +72,16 @@ async function currencyFetch(from, to, date = '', question = '', amount) {
                 }
                 if (!isNaN(a) && (!isNaN(b))) {
                     if (a > b) {
-                        return to + add + 'more valuable';
+                        return `${to} ${add} more valuable`;
                     } else {
-                        return from + add + 'more valuable';
+                        return `${from} ${add} more valuable`;
                     }
                 } else {
                     return errorMsg;
                 }
             } else if (question === 'rate') {
                 const respValue = _.get(response.data, 'rates.' + from);
-                return '1 ' + base + ' is ' + respValue + ' ' + from;
+                return `1 ${base} is ${respValue} ${from}`;
             } else if (question === 'fallen') {
                 const a = _.get(response.data, 'rates.' + from);
                 return yesterday(a, from);

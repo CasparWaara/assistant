@@ -28,19 +28,17 @@ function weatherCurrent(location, search = '', days = 0) {
                 if (w !== undefined) {
                     if (search === '') {
                         weather += w.description + '\n';
-                        weather += 'It\'s ' + w.item.condition.temp + 'C and it is ' + w.item.condition.text;
+                        weather += `It's ${w.item.condition.temp} C and it is ${w.item.condition.text}`;
                     } else if (search === 'sunset') {
                         weather += w.description + '\n';
-                        weather += 'Sun will set at ' + w.astronomy.sunset;
+                        weather += `Sun will set at ${w.astronomy.sunset}`;
                     } else if (search === 'sunrise') {
                         weather += w.description + '\n';
-                        weather += 'Sun will rise at ' + w.astronomy.sunrise;
+                        weather += `Sun will rise at ${w.astronomy.sunrise}`;
                     } else if (search === 'forecast') {
                         weather += w.description + '\n';
                         for (let i = 0; i < days; i++) {
-                            weather += w.item.forecast[i].day + ' ' + w.item.forecast[i].date + '\n' +
-                                '   ' + w.item.forecast[i].high + ' / ' + w.item.forecast[i].low + ' C, ' +
-                                w.item.forecast[i].text + '\n';
+                            weather += `${w.item.forecast[i].day} ${w.item.forecast[i].date} \n ${w.item.forecast[i].high} / ${w.item.forecast[i].low} C, ${w.item.forecast[i].text}\n`;
                         }
                     } else if (search === 'rain') {
                         const substrings = ['rain', 'snow', 'shower'];
@@ -97,6 +95,8 @@ function getLocation(input) {
         return input.substring(input.indexOf('at') + 3);
     } else if (input.split(' ').indexOf('to') > 0) {
         return input.substring(input.indexOf('to') + 3);
+    } else if (input.split(' ').indexOf('for') > 0) {
+        return input.substring(input.indexOf('for') + 3);
     } else {
         return '';
     }
