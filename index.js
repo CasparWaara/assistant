@@ -12,7 +12,7 @@ rl.prompt();
 
 rl
     .on('line', line => {
-        parser.virtual_assistant(line.trim()).then((result) => {
+        parser.virtual_assistant(line.trim().toLowerCase()).then((result) => {
             console.log(result);
             rl.prompt();
         }).catch((error) => {

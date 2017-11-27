@@ -115,6 +115,9 @@ function moneyParser(input) {
     } else if (input.startsWith('has')) {
         const from = input.split(' ')[1];
         return currencyFetch(from, '', '', 'fallen');
+    } else if (input.indexOf('rate') > -1) {
+        const from = input.split(' ')[2];
+        return currencyFetch(from, '', '', 'rate');
     }
     return errorMsg;
 }

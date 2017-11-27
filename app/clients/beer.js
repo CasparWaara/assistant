@@ -30,7 +30,7 @@ function beerFetch(search, sparam) {
             if (search === 'random') {
                 return recipeParser(response.data);
             } else if (search === 'hop' || search === 'malt' || search === 'food') {
-                return recipeParser(response.data[Math.floor(Math.random() * response.data.length) + 0]);
+                return recipeParser([response.data[Math.floor(Math.random() * response.data.length) + 0]]);
             } else if (search === 'yeast') {
                 return nameParser(response.data);
             }
@@ -89,10 +89,6 @@ function recipeParser(beers) {
         resp += `Yeast to be used:  ${beer.ingredients.yeast}\n`;
         resp += `Tips: \n ${beer.brewers_tips} \n`;
     }
-
-
-
-
     return resp;
 }
 

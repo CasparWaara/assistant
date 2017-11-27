@@ -62,7 +62,7 @@ function isStock(input) {
 
 
 function isBeer(input) {
-    const substrings = ['random', 'beer', 'hop'];
+    const substrings = ['beer', 'beers', 'hop'];
     if (substrings.some(function (v) {
             return input.indexOf(v) >= 0;
         })) {
@@ -73,7 +73,7 @@ function isBeer(input) {
 }
 
 function isPatent(input) {
-    const substrings = ['patent', 'inventor', 'ceo', 'revenue', 'news'];
+    const substrings = ['patent', 'patents', 'inventor'];
     if (substrings.some(function (v) {
             return input.indexOf(v) >= 0;
         })) {

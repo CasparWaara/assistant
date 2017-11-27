@@ -47,9 +47,11 @@ function stockFetch(search, sparam) {
 
         })
         .catch(function (error) {
-            if (error.data !== undefined) {
-                if (error.data === 'Unknown symbol') {
+            if (error.response.data !== undefined) {
+                if (error.response.data === 'Unknown symbol') {
                     return 'Unknown symbol :(';
+                } else {
+                    return errorMsg;
                 }
             } else {
                 return errorMsg + ' ' + error;
