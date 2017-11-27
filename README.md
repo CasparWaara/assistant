@@ -11,7 +11,7 @@ This is done as a part of competition.
  * npm start
 
 Example questions:
-<> notes example parameter. Subtitute with your own.
+<> notes example parameter. Substitute with your own.
 ```
 * Weather information:
     - what's the weather in <oulu, finland>
