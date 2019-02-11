@@ -1,6 +1,6 @@
 # Virtual assistant Challenge
 
-This is done as a part of competition.
+Made for RD Velho SW Developer Challenge 2018.
 
 ### Requirements
  * Node.js 8
